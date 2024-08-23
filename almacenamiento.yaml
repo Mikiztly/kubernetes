@@ -1,0 +1,21 @@
+# En este archivo configuramos el almacenamiento para tener un volumen persistente, lo marco como default para que si no se indica otra cosa se utilice este almacenamiento. Yo lo estoy utilizando en un directorio montado con glusterfs para tener la persistencia de datos en todos los nodos.
+# Crear el almacenamiento:
+# microk8s kubectl apply -f almacenamiento.yaml
+# Comprobar si se creo bien
+# microk8s kubectl get storageclass
+# Marcarlo como default
+# microk8s kubectl patch storageclass microk8s-hostpath -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+# microk8s kubectl patch storageclass almacenamiento -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+
+provisioner: microk8s.io/hostpath
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: almacenamiento
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+reclaimPolicy: Retain
+parameters:
+  pvDir: /mnt/docker-data
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
