@@ -1,4 +1,6 @@
 # En este archivo configuramos el almacenamiento para tener un volumen persistente, lo marco como default para que si no se indica otra cosa se utilice este almacenamiento. Yo lo estoy utilizando en un directorio montado con glusterfs para tener la persistencia de datos en todos los nodos.
+# Habilitar el almacenamiento:
+# microk8s enable hostpath-storage
 # Crear el almacenamiento:
 # microk8s kubectl apply -f almacenamiento.yaml
 # Comprobar si se creo bien
