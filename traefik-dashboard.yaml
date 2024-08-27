@@ -1,0 +1,16 @@
+# https://www.robert-jensen.dk/posts/2021-microk8s-with-traefik-and-metallb/
+# kubectl apply -f traefik-dashboard.yaml
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`10.244.0.25`) && ( PathPrefix(`/api`) || PathPrefix(`/dashboard`) ) # Host(`traefik-test.here`) && ( PathPrefix(`/api`) || PathPrefix(`/dashboard`) )
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
