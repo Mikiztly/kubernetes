@@ -1,7 +1,7 @@
 # https://microk8s.io/docs/addon-metallb
 # Habilita el loadbalancer y metallb
 # microk8s enable ingress
-# microk8s enable metallb:[rango_IPs_para_usar]
+# microk8s enable metallb:[rango_IPs_para_usar]  Aca uso la IP de la LAN donde estan los servidores (192.168.0.210-192.168.0.210)
 # Habilitar las IP
 # kubectl apply -f metallb-service.yaml
 

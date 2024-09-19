@@ -1,0 +1,20 @@
+# https://microk8s.io/docs/how-to-nfs
+# Una vez habilitados los drivers se crea el Storage Class
+# Para activarlo ejecutamos:
+# microk8s kubectl apply -f - < StorageClass-nfs.yaml
+# Realizamos la comprobacion que este todo bien
+# microk8s kubectl get storageclass
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-csi # Aca se puede cambiar el nombre
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: 192.168.239.254
+  share: /mnt/compartido/k8s-data
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+mountOptions:
+  - hard
+#  - nfsvers=4.1

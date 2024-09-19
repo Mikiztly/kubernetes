@@ -9,8 +9,10 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`10.244.0.25`) && ( PathPrefix(`/api`) || PathPrefix(`/dashboard`) ) # Host(`traefik-test.here`) && ( PathPrefix(`/api`) || PathPrefix(`/dashboard`) )
+    - match: Host(`l`) && ( PathPrefix(`/api`) || PathPrefix(`/dashboard`) ) # Host(`traefik-test.here`) && ( PathPrefix(`/api`) || PathPrefix(`/dashboard`) )
       kind: Rule
       services:
         - name: api@internal
           kind: TraefikService
+#  tls:
+#    certResolver: letsencrypt
