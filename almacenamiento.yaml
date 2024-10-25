@@ -1,4 +1,4 @@
-# En este archivo configuramos el almacenamiento para tener un volumen persistente, lo marco como default para que si no se indica otra cosa se utilice este almacenamiento. Yo lo estoy utilizando en un directorio montado con glusterfs para tener la persistencia de datos en todos los nodos.
+# En este archivo configuramos el almacenamiento para tener un volumen persistente, lo marco como default para que si no se indica otra cosa se utilice este almacenamiento. Yo lo estoy utilizando en un directorio en /mnt/k8s-data para tener la persistencia de datos en todos los nodos.
 # Habilitar el almacenamiento:
 # microk8s enable hostpath-storage
 # Crear el almacenamiento:
@@ -18,6 +18,6 @@ metadata:
     storageclass.kubernetes.io/is-default-class: "true"
 reclaimPolicy: Retain
 parameters:
-  pvDir: /mnt/docker-data
+  pvDir: /mnt/k8s-data
 volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true

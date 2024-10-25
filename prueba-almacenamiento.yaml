@@ -1,0 +1,35 @@
+# Reclamamos un poco de espacio del almacenamiento recién creado
+# kubectl apply -f prueba-almacenamiento.yaml
+# Verificar si se creo bien 
+# kubectl describe pv
+# Borrar el pod y el pvc
+# kubectl delete pod test-nginx-pvc
+# kubectl delete pvc test-pvc
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pvc
+spec:
+  storageClassName: almacenamiento
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
+---
+# Creamos una aplicación de prueba
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-nginx-pvc
+spec:
+  volumes:
+    - name: pvc
+      persistentVolumeClaim:
+        claimName: test-pvc
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: pvc
+          mountPath: /usr/share/nginx/html
